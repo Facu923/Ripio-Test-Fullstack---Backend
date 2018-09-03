@@ -48,9 +48,9 @@ class AccountSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class TransferSerializer(serializers.HyperlinkedModelSerializer):
-    # accountFrom = serializers.PrimaryKeyRelatedField(many=False, read_only=False)
-    # accountTo = serializers.PrimaryKeyRelatedField(many=False, read_only=False)
+    accountFrom = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all(), many=False)
+    accountTo = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all(), many=False)
 
     class Meta:
         model = Transfer
-        fields = ('id', 'accountFrom', 'accountTo', 'amount')
+        fields = ('id', 'accountFrom', 'accountTo', 'amount', 'date')

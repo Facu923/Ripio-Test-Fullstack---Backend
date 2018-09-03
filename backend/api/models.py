@@ -49,7 +49,7 @@ class Account(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('number',)
+        ordering = ('id', 'number', 'client')
         unique_together = (('client', 'currencyType'),)
 
     def __str__(self):
@@ -78,8 +78,8 @@ class Account(models.Model):
 
 class Transfer(models.Model):
     id = models.AutoField(primary_key=True)
-    accountFrom = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='accountFrom')
-    accountTo = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='accountTo')
+    accountFrom = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='accountFrom', null=True)
+    accountTo = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='accountTo', null=True)
     amount = models.DecimalField(decimal_places=2, max_digits=10, default=0)
     date = models.DateTimeField(auto_now_add=True, auto_now=False)
 
